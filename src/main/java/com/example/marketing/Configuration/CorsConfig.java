@@ -1,4 +1,4 @@
-package com.example.marketing.Configuration;
+package com.example.marketing.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,4 +1,4 @@
-package com.example.marketing.Configuration;
+package com.example.marketing.configuration;
 
 
 import org.modelmapper.ModelMapper;

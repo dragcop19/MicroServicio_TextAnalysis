@@ -28,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TextAnalysisController {
 
-    private final TextAnalysisServiceImpl textAnalysisService;
+    private final TextAnalysisService textAnalysisService;
 
     // =======================================================
     // === CRUD Endpoints ====================================

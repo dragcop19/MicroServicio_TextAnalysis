@@ -1,4 +1,4 @@
-package com.example.marketing.Configuration;
+package com.example.marketing.configuration;
 
 import com.example.marketing.model.Role;
 import com.example.marketing.model.User;

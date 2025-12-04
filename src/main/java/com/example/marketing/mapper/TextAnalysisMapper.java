@@ -27,11 +27,6 @@ public class TextAnalysisMapper {
         TextAnalysis entity = new TextAnalysis();
         
         entity.setPublicationApiId(dto.publicationApiId());
-        
-        entity.setSentiment(dto.sentiment());
-        entity.setSentimentConfidenceScore(dto.sentimentConfidenceScore());
-        entity.setDetectedLanguage(dto.detectedLanguage());
-        entity.setCrisisScore(dto.crisisScore());
  
         return entity;
     }
@@ -63,10 +58,5 @@ public class TextAnalysisMapper {
         if (dto == null || entity == null) {
             return;
         }
-        
-        entity.setSentiment(dto.sentiment());
-        entity.setSentimentConfidenceScore(dto.sentimentConfidenceScore());
-        entity.setDetectedLanguage(dto.detectedLanguage());
-        entity.setCrisisScore(dto.crisisScore());
     }
 }

@@ -33,6 +33,7 @@ public interface TextAnalysisService {
     
     // Encuentra los análisis con un sentimiento específico (e.g., 'Negative')
     List<TextAnalysisResponseDTO> findBySentiment(String sentiment);
+    PublicationResponseDTO retrievePublicationById(Integer publicationId);
     
     // Encuentra análisis con una confianza de sentimiento superior a un umbral
     List<TextAnalysisResponseDTO> findByConfidenceAbove(BigDecimal confidenceScore);

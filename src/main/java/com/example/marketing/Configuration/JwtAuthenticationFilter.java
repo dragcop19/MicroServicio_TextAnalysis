@@ -1,4 +1,4 @@
-package com.example.marketing.Configuration;
+package com.example.marketing.configuration;
 
 import com.example.marketing.service.JwtService;
 import jakarta.servlet.FilterChain;
