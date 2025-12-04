@@ -32,11 +32,8 @@ public class TextAnalysisServiceImpl implements TextAnalysisService {
     private final TextAnalysisRepository textAnalysisRepository;
     private final RestTemplate restTemplate;
 
-    private static final String MARKETING_CORE_URL = "http://localhost:8081/api/v1/publications/";
+    private static final String MARKETING_CORE_URL = "https://marketing-v2.onrender.com/api/v1/publications/";
 
-    // =======================================================
-    // === Implementación de Métodos CRUD ====================
-    // =======================================================
 
     @Override
     public TextAnalysisResponseDTO create(TextAnalysisRequestDTO request) {
@@ -80,7 +77,6 @@ public class TextAnalysisServiceImpl implements TextAnalysisService {
                         () -> new EntityNotFoundException("Análisis de Texto no encontrado con ID: " + analysisId));
 
         TextAnalysisMapper.copyToEntity(request, existingAnalysis);
-        // Si hay que actualizar la publicación, se haría aquí.
 
         TextAnalysis savedAnalysis = textAnalysisRepository.save(existingAnalysis);
         return TextAnalysisMapper.toResponseDTO(savedAnalysis);
@@ -135,7 +131,6 @@ public class TextAnalysisServiceImpl implements TextAnalysisService {
                     url,
                     PublicationResponseDTO.class);
 
-            // Si el código es 2xx, devolvemos el cuerpo
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
                 return response.getBody();
             }
