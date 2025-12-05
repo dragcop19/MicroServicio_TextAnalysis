@@ -13,52 +13,36 @@ public class AzureCognitiveClient {
 
     private final RestTemplate restTemplate;
 
-    // Inyección de credenciales desde application.properties
+    // Inyección de credenciales
     @Value("${azure.text-analysis.endpoint}")
     private String endpoint;
 
     @Value("${azure.text-analysis.key}")
     private String subscriptionKey;
 
-    @Value("${azure.text-analysis.api-version}")
-    private String apiVersion;
-
     public AzureCognitiveClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    /**
-     * Analiza el sentimiento del texto y devuelve los resultados.
-     */
     public Map<String, Object> analyzeSentiment(String text) {
-        // La ruta de la API de análisis de sentimiento
-        String url = endpoint + "language/analyze-text/jobs?api-version=" + apiVersion;
+        String url = endpoint + "text/analytics/v3.1/sentiment"; 
 
-        // Headers requeridos por Azure (Ocp-Apim-Subscription-Key)
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Ocp-Apim-Subscription-Key", subscriptionKey);
 
-        // Cuerpo de la solicitud (Documentos a analizar)
         Map<String, Object> body = Map.of(
-            "analysisInput", Map.of(
-                "documents", Collections.singletonList(
-                    Map.of(
-                        "id", "1",
-                        "text", text,
-                        "language", "es" // Asumimos español si la detección de idioma es compleja
-                    )
+            "documents", Collections.singletonList(
+                Map.of(
+                    "id", "1",
+                    "text", text,
+                    "language", "es"
                 )
-            ),
-            "tasks", Collections.singletonList(
-                Map.of("taskName", "SentimentAnalysis",
-                       "kind", "SentimentAnalysis")
             )
         );
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        // Realiza la llamada POST a Azure
         ResponseEntity<Map> response = restTemplate.exchange(
             url,
             HttpMethod.POST,
@@ -67,11 +51,6 @@ public class AzureCognitiveClient {
         );
 
         if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-            // NOTA: Azure Language Service a menudo devuelve un 202 Accepted para trabajos asíncronos.
-            // Para una integración simple, usaremos un endpoint más directo o simplificaremos la respuesta.
-            
-            // Simulación: Si usáramos el endpoint de análisis rápido, devolvería el resultado.
-            // Devolveremos la respuesta completa para que el servicio la procese.
             return response.getBody();
         }
 
